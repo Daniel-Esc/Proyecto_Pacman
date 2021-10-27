@@ -1,3 +1,17 @@
+# 26/10/2021
+# 03:35 pm
+
+# Juego Packman, Un circulo amarillo debe conseguir puntos mientras unos fantasmas lo persiguen.
+# Los fantas mas son mas rápidos que Packman, saben donde está y puede jugarse en diferentes tableros
+
+# Modificado por:
+
+# Gabriel Sebastián Garibay Dávila
+# Daniel Evaristo Escalera Bonilla
+# Francisco Cruz Vázquez
+# Juan Carlos Martínez Zacarías
+# Carmina López Palacios
+
 from random import choice
 from turtle import *
 from freegames import floor, vector
@@ -7,12 +21,14 @@ path = Turtle(visible=False)
 writer = Turtle(visible=False)
 aim = vector(5, 0)
 pacman = vector(-40, -80)
+"Los vectores de los fantasmas cambian a 10 en vez de 5 para que se muevan mas rápido"
 ghosts = [
-    [vector(-180, 160), vector(5, 0)],
-    [vector(-180, -160), vector(0, 5)],
-    [vector(100, 160), vector(0, -5)],
-    [vector(100, -160), vector(-5, 0)],
+    [vector(-180, 160), vector(10, 0)],
+    [vector(-180, -160), vector(0, 10)],
+    [vector(100, 160), vector(0, -10)],
+    [vector(100, -160), vector(-10, 0)],
 ]
+"Los unos representan los espacios donde packman y los fantasmas se pueden mover"
 tiles = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0,
@@ -117,12 +133,14 @@ def move():
         if valid(point + course):
             point.move(course)
         else:
+            "Los vectores de los fantasmas cambian a 10 en vez de 5 para que se muevan mas rápido"
             options = [
                 vector(10, 0),
                 vector(-10, 0),
                 vector(0, 10),
                 vector(0, -10),
             ]
+            "Los fantasmas detectan la direccion de pacman y cambian su perspectiva hacia esa direccion"
             if dist_pac_x >= 0 and dist_pac_x <= 0:
                 plan = choice((options[0],options[2]))
                 if not valid (point + plan):
