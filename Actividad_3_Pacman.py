@@ -112,6 +112,8 @@ def move():
     dot(20, 'yellow')
 
     for point, course in ghosts:
+        dist_pac_x = pacman.x - point.x
+        dist_pac_y = pacman.y - point.y
         if valid(point + course):
             point.move(course)
         else:
@@ -121,7 +123,42 @@ def move():
                 vector(0, 5),
                 vector(0, -5),
             ]
-            plan = choice(options)
+            if dist_pac_x >= 0 and dist_pac_x <= 0:
+                plan = choice((options[0],options[2]))
+                if not valid (point + plan):
+                    if plan == options[0]:
+                        plan = options[2]
+                    else:
+                        plan = options[0]
+                if not valid (point + plan):
+                    plan = options[3]
+            if dist_pac_x >= 0 and dist_pac_x >= 0:
+                plan = choice((options[0],options[3]))
+                if not valid (point + plan):
+                    if plan == options[0]:
+                        plan = options[3]
+                    else:
+                        plan = options[0]
+                if not valid (point + plan):
+                    plan = options[2]
+            if dist_pac_x <= 0 and dist_pac_x <= 0:
+                plan = choice((options[1],options[2]))
+                if not valid (point + plan):
+                    if plan == options[1]:
+                        plan = options[2]
+                    else:
+                        plan = options[1]
+                if not valid (point + plan):
+                    plan = options[3]
+            if dist_pac_x <= 0 and dist_pac_x >= 0:
+                plan = choice((options[1],options[3]))
+                if not valid (point + plan):
+                    if plan == options[1]:
+                        plan = options[3]
+                    else:
+                        plan = options[1]
+                if not valid (point + plan):
+                    plan = options[2]
             course.x = plan.x
             course.y = plan.y
 
